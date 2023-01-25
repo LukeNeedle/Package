@@ -15,30 +15,88 @@ class check:
         if not variable.isalpha():
             return variable, False
         else:
-            return variable, True
+            return str(variable), True
     
+    def number(variable):
+        variable, valid = check.blank(variable)
+        if not valid:
+            return variable, False        
+        try:
+            variable = int(variable)
+        except:
+            try:
+                variable = float(variable)
+            except:
+                return variable, False
+            else:
+                return variable, True
+        else:
+            return variable, True
+
     def integer(variable):
         variable, valid = check.blank(variable)
         if not valid:
             return variable, False        
         
-        if not variable.isdigit():
+        variable, valid = check.number(variable)
+        if not valid:
+            return variable, False
+        
+        if variable % 1 != 0:
             return variable, False
         else:
-            return variable, True
+            return int(variable), True
+    
+    def decimal(variable):
+        variable, valid = check.blank(variable)
+        if not valid:
+            return variable, False
+        
+        variable, valid = check.number(variable)
+        if not valid:
+            return variable, False
+        
+        variable = float(variable)
+        if variable % 1 == 0:
+            return variable, False
+        else:
+            return float(variable), True
+    
+    def boolean(variable):
+        if variable not in ["True", "False"]:
+            return variable, False
+        else:
+            return bool(variable), True
+
 class ask:
     def string(message:str):
-        variable = input(message)
+        variable = input(f"{message}: ")
         variable, valid = check.string(variable)
         if valid:
-            return str(variable)
+            return variable
         else:
-            return str(ask.string(message))
+            return ask.string(message)
     
     def integer(message:str):
-        variable = input(message)
+        variable = input(f"{message}: ")
         variable, valid = check.integer(variable)
         if valid:
-            return int(variable)
+            return variable
         else:
-            return int(ask.integer(message))
+            return ask.integer(message)
+    
+    def boolean(message:str):
+        variable = input(f"{message}: ")
+        variable, valid = check.boolean(variable)
+        if valid:
+            return variable
+        else:
+            return ask.boolean(message)
+
+    def decimal(message:str):
+        variable = input(f"{message}: ")
+        variable, valid = check.decimal(variable)
+        if valid:
+            return variable
+        else:
+            return ask.decimal(message)
