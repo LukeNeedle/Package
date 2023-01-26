@@ -2,5 +2,6 @@ def add(*numbers):
     valid = True
     for number in numbers:
         if valid == False:
-            number, valid = inputs.check.integer(number)
+            number, valid = check.decimal(number)
     return sum(numbers)
+
