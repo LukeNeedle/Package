@@ -55,10 +55,6 @@ class check:
         variable, valid = check.number(variable)
         if not valid:
             return variable, False
-        
-        variable = float(variable)
-        if variable % 1 == 0:
-            return variable, False
         else:
             return float(variable), True
     
