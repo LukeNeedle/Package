@@ -1,2 +1,1 @@
-import Packages.inputs
-import Packages.basicCalc
+from Packages import *
