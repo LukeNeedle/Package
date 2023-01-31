@@ -11,9 +11,6 @@ class check:
         variable, valid = check.blank(variable)
         if not valid:
             return variable, False
-        
-        if not variable.isalpha():
-            return variable, False
         else:
             return str(variable), True
     
@@ -65,34 +62,34 @@ class check:
             return bool(variable), True
 
 class ask:
-    def string(message:str):
-        variable = input(f"{message}: ")
+    def string(message:str, end=": "):
+        variable = input(f"{message}{end}")
         variable, valid = check.string(variable)
         if valid:
             return variable
         else:
-            return ask.string(message)
+            return ask.string(message, end)
     
-    def integer(message:str):
-        variable = input(f"{message}: ")
+    def integer(message:str, end=": "):
+        variable = input(f"{message}{end}")
         variable, valid = check.integer(variable)
         if valid:
             return variable
         else:
-            return ask.integer(message)
+            return ask.integer(message, end)
     
-    def boolean(message:str):
-        variable = input(f"{message}: ")
+    def boolean(message:str, end=": "):
+        variable = input(f"{message}{end}")
         variable, valid = check.boolean(variable)
         if valid:
             return variable
         else:
-            return ask.boolean(message)
+            return ask.boolean(message, end)
 
-    def decimal(message:str):
-        variable = input(f"{message}: ")
+    def decimal(message:str, end=": "):
+        variable = input(f"{message}{end}")
         variable, valid = check.decimal(variable)
         if valid:
             return variable
         else:
-            return ask.decimal(message)
+            return ask.decimal(message, end)
