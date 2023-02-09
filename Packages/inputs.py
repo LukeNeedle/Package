@@ -56,10 +56,12 @@ class check:
             return float(variable), True
     
     def boolean(variable):
+        if variable == "True":
+            return True, True
+        elif variable == "False":
+            return False, True
         if variable not in ["True", "False"]:
             return variable, False
-        else:
-            return bool(variable), True
 
 class ask:
     def string(message:str, end=": "):
