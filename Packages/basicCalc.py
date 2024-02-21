@@ -37,9 +37,6 @@ def multiply(*numbers):
     return None
 
 def factorial(number):
-    number, valid = check.integer(number)
-    if valid:
-        return factorialFunc(number)
     """
     Calculates the factorial of the integer supplied.
 
@@ -49,6 +46,10 @@ def factorial(number):
     Returns:
         integer: The factorial of parapeter number. None if the parameter isn't an integers.
     """
+    valid = check.is_integer(str(number))
+    if valid == True:
+        return factorialFunc(int(number))
+    return None
 
 def factorialFunc(number):
     """
