@@ -68,11 +68,11 @@ def string(variable, mode:str):
     variable, valid = check.string(variable)
     if valid:
         mode = mode.lower()
-        if mode == "capitalize":
+        if mode == "capitalize" or mode == "caps" or mode == "c":
             return variable.capitalize()
-        elif mode == "title":
+        elif mode == "title" or mode == "t":
             return variable.title()
-        elif mode == "lower":
+        elif mode == "lower" or mode == "l":
             return variable.lower()
-        elif mode == "upper":
+        elif mode == "upper" or mode == "u":
             return variable.upper()
