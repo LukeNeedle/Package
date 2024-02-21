@@ -1,97 +1,179 @@
 class check:
-    def blank(variable):
-        if variable == "":
-            return variable, False
-        if variable == " ":
-            return variable, False
-        else:
-            return variable, True
-    
-    def string(variable):
-        variable, valid = check.blank(variable)
-        if not valid:
-            return variable, False
-        else:
-            return str(variable), True
-    
-    def number(variable):
-        variable, valid = check.blank(variable)
-        if not valid:
-            return variable, False        
-        try:
-            variable = int(variable)
-        except:
-            try:
-                variable = float(variable)
-            except:
-                return variable, False
-            else:
-                return variable, True
-        else:
-            return variable, True
+    def is_blank(variable:str):
+        """
+        Checks if the string entered is empty.
 
-    def integer(variable):
-        variable, valid = check.blank(variable)
-        if not valid:
-            return variable, False        
-        
-        variable, valid = check.number(variable)
-        if not valid:
-            return variable, False
-        
-        if variable % 1 != 0:
-            return variable, False
-        else:
-            return int(variable), True
+        Args:
+            variable (string): The variable to be checked.
+
+        Returns:
+            Boolean: The result of the check.
+        """
+        if variable in ["", " ", "\a", "\r", "\0"] :
+            return False
+        return True
     
-    def decimal(variable):
-        variable, valid = check.blank(variable)
-        if not valid:
-            return variable, False
+    def is_string(variable):
+        """
+        Checks if the variable entered is a string.
+
+        Args:
+            variable (any): The variable to be checked.
+
+        Returns:
+            Boolean: The result of the check.
+        """
+        result = check.is_blank(variable)
+        if result == True:
+            return False
         
-        variable, valid = check.number(variable)
-        if not valid:
-            return variable, False
-        else:
-            return float(variable), True
+        try:
+            str(variable)
+        except:
+            return False
+        return True
     
-    def boolean(variable):
-        if variable == "True":
-            return True, True
-        elif variable == "False":
-            return False, True
-        if variable not in ["True", "False"]:
-            return variable, False
+    def is_number(variable:str):
+        """
+        Checks if the variable entered is a number.
+
+        Args:
+            variable (string): The variable to be checked.
+
+        Returns:
+            Boolean: The result of the check.
+        """
+        result = check.is_blank(variable)
+        if result != True:
+            return False
+        
+        try:
+            int(variable)
+        except:
+            return False
+        return True
+
+    def is_integer(variable:str):
+        """
+        Checks if the variable entered is an integer.
+
+        Args:
+            variable (string): The variable to be checked.
+
+        Returns:
+            Boolean: The result of the check.
+        """
+        result = check.is_number(variable)
+        if result != True:
+            return False
+        
+        if float(int(variable)) == float(variable):
+            return True
+        return False
+    
+    def is_decimal(variable:str):
+        """
+        Checks if the variable entered is a decimal (float).
+
+        Args:
+            variable (string): The variable to be checked.
+
+        Returns:
+            Boolean: The result of the check.
+        """
+        result = check.is_number(variable)
+        if result != True:
+            return False
+        return True
+    
+    def is_boolean(variable:str):
+        """
+        Checks if the variable entered is a Boolean.
+
+        Args:
+            variable (string): The variable to be checked.
+
+        Returns:
+            Boolean: The result of the check.
+        """
+        result = check.is_blank(variable)
+        if result == True:
+            return False
+        
+        if variable in ["True", "False"]:
+            return True
+        return False
+    
+    def to_boolean(variable:str):
+        """
+        An alternate version of is_boolean, this function will check that the value is either True or False then return the variable in the correct type.
+
+        Args:
+            variable (string): The variable to be checked.
+
+        Returns:
+            Boolean: The result of the conversion. It will be None if the input wasn't valid.
+        """
+        result = check.is_blank(variable)
+        if result == True:
+            return None
+        
+        if result not in ["0", "1"]:
+            result = check.is_boolean(variable)
+            if result != True:
+                return None
+        
+        if variable == "True" or variable == "1":
+            return True
+        elif variable == "False" or variable == "0":
+            return False
+    
+    def valid_email(email):
+        """
+        Checks if the email provided is correct.
+
+        Args:
+            email (string): The email to be checked.
+
+        Returns:
+            Boolean: The result of the check.
+        """
+        import re
+        
+        regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
+        if re.fullmatch(regex, email):
+            return True
+        return False
 
 class ask:
     def string(message:str, end=": "):
         variable = input(f"{message}{end}")
-        variable, valid = check.string(variable)
+        
+        valid = check.is_string(variable)
         if valid:
-            return variable
-        else:
-            return ask.string(message, end)
+            return str(variable)
+        return ask.string(message, end)
     
     def integer(message:str, end=": "):
         variable = input(f"{message}{end}")
-        variable, valid = check.integer(variable)
+        
+        valid = check.is_integer(str(variable))
         if valid:
-            return variable
-        else:
-            return ask.integer(message, end)
+            return int(variable)
+        return ask.integer(message, end)
     
     def boolean(message:str, end=": "):
         variable = input(f"{message}{end}")
-        variable, valid = check.boolean(variable)
-        if valid:
-            return variable
-        else:
+        
+        variable = check.to_boolean(str(variable))
+        if variable == None:
             return ask.boolean(message, end)
+        return variable
 
     def decimal(message:str, end=": "):
         variable = input(f"{message}{end}")
-        variable, valid = check.decimal(variable)
+        
+        valid = check.is_decimal(str(variable))
         if valid:
-            return variable
-        else:
-            return ask.decimal(message, end)
+            return float(variable)
+        return ask.decimal(message, end)
