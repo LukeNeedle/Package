@@ -19,7 +19,6 @@ def add(*numbers):
     return None
 
 def multiply(*numbers):
-    valid = True
     """
     Multiplies all parameters together if they are valid.
 
@@ -29,9 +28,13 @@ def multiply(*numbers):
     result = 0
     
     for number in numbers:
-        if valid == False:
-            number, valid = check.decimal(number)
-    return math.prod(numbers)
+        valid = check.is_decimal(number)
+        if valid == True:
+            result += 1
+    
+    if result == 0:
+        return math.prod(numbers)
+    return None
 
 def factorial(number):
     number, valid = check.integer(number)
