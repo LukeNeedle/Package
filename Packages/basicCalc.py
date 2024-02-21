@@ -1,7 +1,6 @@
 from Packages.inputs import check
 import math
 def add(*numbers):
-    valid = True
     """
     Adds together all parameters if they are valid.
 
@@ -11,9 +10,13 @@ def add(*numbers):
     result = 0
     
     for number in numbers:
-        if valid == False:
-            number, valid = check.decimal(number)
-    return sum(numbers)
+        valid = check.is_decimal(number)
+        if valid == True:
+            result += 1
+    
+    if result == 0:
+        return sum(numbers)
+    return None
 
 def multiply(*numbers):
     valid = True
