@@ -144,6 +144,28 @@ class check:
         if re.fullmatch(regex, email):
             return True
         return False
+    
+    def valid_uk_postcode(postcode):
+        """
+        Checks if the postcode provided is correct.
+
+        Args:
+            email (string): The email to be checked.
+
+        Returns:
+            Boolean: The result of the check.
+        """
+        result = check.is_string(postcode)
+        if result == True:
+            return False
+        
+        import re
+        
+        regex = r'[A-Z][A-Z]?[0-9]( )?([0-9]|[A-Z])?[0-9][A-Z][A-Z]'
+        if re.fullmatch(regex, postcode):
+            return True
+        return False
+
 
 class ask:
     def string(message:str, end=": "):
