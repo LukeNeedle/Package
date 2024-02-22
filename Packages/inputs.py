@@ -138,6 +138,10 @@ class check:
         Returns:
             Boolean: The result of the check.
         """
+        result = check.is_string(email)
+        if result == True:
+            return False
+        
         import re
         
         regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
