@@ -139,7 +139,7 @@ class check:
             Boolean: The result of the check.
         """
         result = check.is_string(email)
-        if result == True:
+        if result != True:
             return False
         
         import re
@@ -160,7 +160,7 @@ class check:
             Boolean: The result of the check.
         """
         result = check.is_string(postcode)
-        if result == True:
+        if result != True:
             return False
         
         import re
