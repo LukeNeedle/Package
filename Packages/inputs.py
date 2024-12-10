@@ -10,8 +10,8 @@ class check:
             Boolean: The result of the check.
         """
         if variable in ["", " ", "\a", "\r", "\0"] :
-            return False
-        return True
+            return True
+        return False
     
     def is_string(variable):
         """
@@ -44,7 +44,7 @@ class check:
             Boolean: The result of the check.
         """
         result = check.is_blank(variable)
-        if result != True:
+        if result == True:
             return False
         
         try:
