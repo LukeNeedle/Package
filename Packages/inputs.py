@@ -203,3 +203,21 @@ class ask:
         if valid:
             return float(variable)
         return ask.decimal(message, end)
+    
+    def confirmation(message:str, end=": "):
+        variable = input(f"{message}{end}")
+        
+        positive = ["yes", "y", "t", "true"]
+        negative = ["no", "n", "f", "false"]
+        
+        valid = check.is_string(variable)
+        if not valid:
+            return ask.confirmation(message, end)
+        
+        variable = str(variable).lower()
+        
+        if valid in positive:
+            return True
+        elif valid in negative:
+            return False
+        return ask.confirmation(message, end)
