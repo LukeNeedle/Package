@@ -216,8 +216,8 @@ class ask:
         
         variable = str(variable).lower()
         
-        if valid in positive:
+        if variable in positive:
             return True
-        elif valid in negative:
+        elif variable in negative:
             return False
         return ask.confirmation(message, end)
