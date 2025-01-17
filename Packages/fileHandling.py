@@ -19,7 +19,7 @@ def nameHandler(fileName, extension = "txt"):
 def name(fileName, extension = "txt"):
     return nameCollisionHandler(fileName, extension)
 
-def pathHandler(startPosition = "/", extension = ".txt", extensionDescription = "Text File", type = "open", title = "open"):
+def pathHandler(startPosition = ".", extension = ".txt", extensionDescription = "Text File", type = "open", title = "open"):
     if extension[0] != ".":
         extension = f".{extension}"
     
@@ -40,5 +40,5 @@ def pathHandler(startPosition = "/", extension = ".txt", extensionDescription = 
     
     return fileName
 
-def path(startPosition = "/", extension = ".txt", extensionDescription = "Text File", type = "open"):
+def path(startPosition = ".", extension = ".txt", extensionDescription = "Text File", type = "open"):
     return pathHandler(startPosition, extension, extensionDescription, type)
